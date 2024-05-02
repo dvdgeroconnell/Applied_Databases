@@ -3,6 +3,7 @@
 # Define the imports here
 import appdb_menu as apm
 import cities_by_country as cbc
+import city_population as cp
 
 def main():
 
@@ -24,7 +25,13 @@ def main():
                 cbc.cities_by_country(choice)
 
             case '2':
-                print("2...")
+                result = False
+                while not result:
+                    choice = input("\nEnter City ID : ")
+                    if choice.isdigit():
+                        result = cp.city_population(choice)
+                    else:
+                        print("Not a valid City ID")
 
             case '3':
                 print("3...")

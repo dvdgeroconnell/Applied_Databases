@@ -26,7 +26,9 @@ def cities_by_country(country):
     count = 0
     cont = True
     while (num>0 and cont):
-        print(results[count])
+        for x in results[count]:
+            print(results[count][x], "| ", end='')
+        print("\b\b  ")
         count +=1
         num -= 1
         if (count % 2) == 0:
@@ -34,5 +36,5 @@ def cities_by_country(country):
             if choice == 'q':
                 cont = False
     if cont == True:
-        choice = input("All done - press Enter to return to menu")
+        choice = input("All printed - press Enter to return to menu")
     return

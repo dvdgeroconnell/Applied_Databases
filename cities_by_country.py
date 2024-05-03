@@ -1,3 +1,13 @@
+# cities_by_country.py (Applied Databases project)
+#
+# A Python function to retrieve the cities in a given country from the city table in the
+# appdbproj database in MySQL
+# They are printed 2 at a time unless the user enters 'q' to exit to the main menu. Once complete, the user is
+# returned to the main menu. 
+# 
+# Author: David O'Connell
+#
+# ***************************************************************************************************
 
 import pymysql as pml
 

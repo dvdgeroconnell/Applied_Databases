@@ -1,9 +1,19 @@
-
+# appbd_main.py (Applied Databases project)
+#
+# The main Python program to present the user with a menu of options to read data from and write data to
+# the appdbproj database in MySQL.
+# Most of the functionality is implemented in functions contained in separate files for maintainability.
+# These are imported at the top of the file below.
+# 
+# Author: David O'Connell
+#
+# ***************************************************************************************************
 
 # Define the imports here
 import appdb_menu as apm
 import cities_by_country as cbc
 import city_population as cp
+import add_person as ap
 
 def main():
 
@@ -34,7 +44,15 @@ def main():
                         print("Not a valid City ID")
 
             case '3':
-                print("3...")
+                print("Add New Person")
+                print("---------------")
+                # ID is a primary key, but not auto-incremented
+                id = input("ID : ")
+                name = input("Name : ")
+                age = input("Age : ")
+                salary = input("Salary : ")
+                city = input("City : ")
+                ap.add_person(id, name, age, salary, city)
 
             case '4':
                 print("4...")

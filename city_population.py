@@ -1,3 +1,14 @@
+# city_population.py (Applied Databases project)
+#
+# A Python function to return an entry in the city table in appdbproj database in MySQL
+# based on the city ID requested.
+# The user is then prompted to either increase or decrease the population.
+# Error handling is implemented around ensuring entries are valid and the population changes
+# can be done.
+# 
+# Author: David O'Connell
+#
+# ***************************************************************************************************
 
 import pymysql as pml
 
@@ -75,22 +86,3 @@ def city_population(id):
 
             found = True
     return found
-
-# Print 2 results at a time and allow the user to quit after each 2 records by entering 'q'
-'''
-    count = 0
-    cont = True
-    while (num>0 and cont):
-        for x in results[count]:
-            print(results[count][x], "| ", end='')
-        print("\b\b  ")
-        count +=1
-        num -= 1
-        if (count % 2) == 0:
-            choice = input("-- Quit (q) --")
-            if choice == 'q':
-                cont = False
-    if cont == True:
-        choice = input("All printed - press Enter to return to menu")
-    return
-'''

@@ -12,9 +12,11 @@ import pymysql as pml
 
 def add_person(id, name, age, salary, city):
 
+    # Create the connection
     db_conn = pml.connect(host="localhost", user="root", password="", db="appdbproj",
                      cursorclass=pml.cursors.DictCursor)
 
+    # Create the SQL
     sql = "INSERT INTO person VALUES (%s, %s, %s, %s, %s)"
 
     with db_conn:

@@ -15,6 +15,9 @@ import cities_by_country as cbc
 import city_population as cp
 import add_person as ap
 import delete_person as dp
+import country_pop as cpl
+import twinned_cities as tc
+import create_twin as ct
 
 def main():
 
@@ -64,13 +67,37 @@ def main():
                 # Error handling will be done in the function
 
             case '5':
-                print("5...")
+                # Loop until the user enters one of <, >, =, and a valid integer population
+                proceed = False
+                gle_options = ('<','>','=')
+                print("Countries by Pop")
+                print("----------------")
+
+                while not proceed:
+                    gle = input("Enter < > or = : ")
+                    if gle in gle_options:
+                        proceed = True
+
+                proceed = False
+
+                while not proceed:
+                    pop = input("Enter population : ")
+                    if pop.isdigit():
+                        proceed = True
+
+                cpl.country_pop(gle, pop)
 
             case '6':
-                print("6...")
+                tc.twinned_cities()
 
             case '7':
-                print("6...")
+                # Loop until the user enters an integer
+                proceed = False
+                while not proceed:
+                    twin = input("Enter ID of City to twin with Dublin: ")
+                    if twin.isdigit():
+                        proceed = True
+                ct.create_twin(twin)
 
             case _:
                 # Catch-all for entries other than the ones listed above

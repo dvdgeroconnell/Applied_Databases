@@ -16,7 +16,7 @@ def city_population(id):
 
     choices = ('I','i','D','d')
 
-    # Use DictCursor as it is easier to get access to the attributes if the row
+    # Use DictCursor as it is easier to get access to the attributes of the row
     db_conn = pml.connect(host="localhost", user="root", password="", db="appdbproj",
                      cursorclass=pml.cursors.DictCursor)
 

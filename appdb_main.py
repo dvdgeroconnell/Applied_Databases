@@ -14,6 +14,7 @@ import appdb_menu as apm
 import cities_by_country as cbc
 import city_population as cp
 import add_person as ap
+import delete_person as dp
 
 def main():
 
@@ -55,7 +56,12 @@ def main():
                 ap.add_person(id, name, age, salary, city)
 
             case '4':
-                print("4...")
+                success = False
+                delete_id = input("Enter ID of Person to Delete : ")
+                success = dp.delete_person(delete_id)
+                if success:
+                    print("Person ID:", delete_id, "deleted")
+                # Error handling will be done in the function
 
             case '5':
                 print("5...")

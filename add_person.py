@@ -1,6 +1,6 @@
 # add_person.py (Applied Databases project)
 #
-# A Python function to add an entry to the person table in appdbproj database in MySQL
+# A Python function to add an entry to the person table in the appdbproj database in MySQL
 # Exception handling around duplicate primary keys and missing foreigh keys is done.
 # Generic exceptions are also caught.
 #

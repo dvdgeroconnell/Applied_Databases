@@ -10,12 +10,19 @@
 # ***************************************************************************************************
 
 import pymysql as pml
+import dbconfig as cfg
 
 def delete_person(delete_id):
 
-    # Create the connection
-    db_conn = pml.connect(host="localhost", user="root", password="", db="appdbproj",
-                          cursorclass=pml.cursors.DictCursor)
+    # Use imported configuration
+    host=     cfg.mysql['host']
+    user=     cfg.mysql['user']
+    password= cfg.mysql['password']
+    database= cfg.mysql['database']
+
+    # Use DictCursor as it is easier to get access to the attributes of the row
+    db_conn = pml.connect(host=host, user=user, password=password, db=database,
+                     cursorclass=pml.cursors.DictCursor)
 
     # First check if that person has visited a city - if so, they must not be deleted
     sql = "SELECT vc.personID, vc.cityID FROM hasvisitedcity vc \

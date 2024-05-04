@@ -8,6 +8,7 @@
 # ***************************************************************************************************
 
 from neo4j import GraphDatabase as gdb
+import dbconfig as cfg
 
 def get_cities(tx):
 
@@ -23,9 +24,14 @@ def get_cities(tx):
     return names1, names2
 
 def twinned_cities():
+    
+    # Use imported configuration
+    uri =      cfg.neo4j['uri']
+    user =     cfg.neo4j['user']
+    password = cfg.neo4j['password']
 
-    uri = "neo4j://localhost:7687"
-    with gdb.driver(uri, auth=("neo4j","dave1234"), max_connection_lifetime=1000) as driver:
+    #uri = "neo4j://localhost:7687"
+    with gdb.driver(uri, auth=(user,password), max_connection_lifetime=1000) as driver:
         #print(driver.execute_query("SHOW HOME DATABASE").records[0]["name"])
 
         with driver.session() as session:

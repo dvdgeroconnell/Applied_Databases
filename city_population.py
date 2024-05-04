@@ -11,19 +11,26 @@
 # ***************************************************************************************************
 
 import pymysql as pml
+import dbconfig as cfg
 
 def city_population(id):
 
     choices = ('I','i','D','d')
 
+    # Use imported configuration
+    host=     cfg.mysql['host']
+    user=     cfg.mysql['user']
+    password= cfg.mysql['password']
+    database= cfg.mysql['database']
+
     # Use DictCursor as it is easier to get access to the attributes of the row
-    db_conn = pml.connect(host="localhost", user="root", password="", db="appdbproj",
+    db_conn = pml.connect(host=host, user=user, password=password, db=database,
                      cursorclass=pml.cursors.DictCursor)
 
     sql = "SELECT ID, Name, CountryCode, Population, latitude, longitude \
            from city where ID = %s"
     
-# Note - 'with' takes care of closing the connection when we are finished with it
+    # Note - 'with' takes care of closing the connection when we are finished with it
     with db_conn:
         cursor = db_conn.cursor()
         cursor.execute(sql, (id))
@@ -85,4 +92,5 @@ def city_population(id):
                         print("ERROR - unable to complete database update.")
 
             found = True
+
     return found

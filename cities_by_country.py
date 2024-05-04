@@ -10,11 +10,18 @@
 # ***************************************************************************************************
 
 import pymysql as pml
+import dbconfig as cfg
 
 def cities_by_country(country):
 
+    # Use imported configuration
+    host=     cfg.mysql['host']
+    user=     cfg.mysql['user']
+    password= cfg.mysql['password']
+    database= cfg.mysql['database']
+
     # Use DictCursor as it is easier to get access to the attributes of the row
-    db_conn = pml.connect(host="localhost", user="root", password="", db="appdbproj",
+    db_conn = pml.connect(host=host, user=user, password=password, db=database,
                      cursorclass=pml.cursors.DictCursor)
 
     sql = "SELECT co.Name, cy.Name, cy.District, cy.Population \

@@ -9,7 +9,6 @@
 # Error Condition 1: The city does not exist in MySQL - the 
 
 
-
 # 7add an entry to the person table in the appdbproj database in MySQL
 # Exception handling around duplicate primary keys and missing foreigh keys is done.
 # Generic exceptions are also caught.
@@ -18,9 +17,9 @@
 #
 # ***************************************************************************************************
 
-#import pymysql as pml
 from neo4j import GraphDatabase as gdb
 import pymysql as pml
+import dbconfig as cfg
 
 #-----------------------------------------------------------------------------------
 # This function checks if a city exists in the neo4j database.
@@ -71,8 +70,14 @@ def check_twinned(tx, id):
 
 def retrieve_city_from_mysql(city):
 
-    # Create the connection
-    db_conn = pml.connect(host="localhost", user="root", password="", db="appdbproj",
+    # Use imported configuration
+    host=     cfg.mysql['host']
+    user=     cfg.mysql['user']
+    password= cfg.mysql['password']
+    database= cfg.mysql['database']
+
+    # Use DictCursor as it is easier to get access to the attributes of the row
+    db_conn = pml.connect(host=host, user=user, password=password, db=database,
                      cursorclass=pml.cursors.DictCursor)
 
     # Build the sql string.
@@ -123,9 +128,13 @@ def create_twin(twin):
 
     dublin = 1447
     outcome=False
-    uri = "neo4j://localhost:7687"
 
-    with gdb.driver(uri, auth=("neo4j","dave1234"), max_connection_lifetime=1000) as driver:
+    # Use imported configuration
+    uri =      cfg.neo4j['uri']
+    user =     cfg.neo4j['user']
+    password = cfg.neo4j['password']
+
+    with gdb.driver(uri, auth=(user, password), max_connection_lifetime=1000) as driver:
 
         with driver.session() as session:
             # Check if city is in the neo4j database

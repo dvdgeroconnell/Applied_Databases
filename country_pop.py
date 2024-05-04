@@ -17,8 +17,9 @@ def country_pop(gle, pop):
     db_conn = pml.connect(host="localhost", user="root", password="", db="appdbproj",
                      cursorclass=pml.cursors.DictCursor)
 
-    # Build the sql string. A bit ugle, but could not get this to work with <, >, = as a string.
-    # We know gle is already one of <, >, = as it has been checked by the calling program.
+    # Build the sql string. A bit ugly, but could not get this to work with inserting 
+    # one of <, >, = as a string. I may revisit if I have time. We know gle is one of
+    # <, >, = as it has been checked by the calling program.
     match gle:
         case '<':
             sql = "SELECT Code, Name, Continent, Population FROM country WHERE Population < %s"

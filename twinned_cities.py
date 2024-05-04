@@ -1,8 +1,7 @@
-# add_person.py (Applied Databases project)
+# twinned_cities.py (Applied Databases project)
 #
-# A Python function to add an entry to the person table in the appdbproj database in MySQL
-# Exception handling around duplicate primary keys and missing foreigh keys is done.
-# Generic exceptions are also caught.
+# A Python function to return the list of twinned cities from the neo4j database and
+# print them out in the required format.
 #
 # Author: David O'Connell
 #
@@ -26,19 +25,18 @@ def get_cities(tx):
 def twinned_cities():
 
     uri = "neo4j://localhost:7687"
-    driver = gdb.driver(uri, auth=("neo4j","dave1234"), max_connection_lifetime=1000)
-    #print("connected: {}".format(driver.verify_connectivity()))
-    #print(driver.execute_query("SHOW HOME DATABASE").records[0]["name"])
+    with gdb.driver(uri, auth=("neo4j","dave1234"), max_connection_lifetime=1000) as driver:
+        #print(driver.execute_query("SHOW HOME DATABASE").records[0]["name"])
 
-    with driver.session() as session:
-        #res = session.run("SHOW DATABASES yield name;")
-        #for i in res:
-        #    print(i['name'])
-        values1, values2 = session.read_transaction(get_cities)
-        print("\nTwinned Cities")
-        print("--------------")
-        entries = len(values1)
-        for name in range(entries):
-            print(values1[name],"<->",values2[name])
+        with driver.session() as session:
+            #res = session.run("SHOW DATABASES yield name;")
+            #for i in res:
+            #    print(i['name'])
+            values1, values2 = session.read_transaction(get_cities)
+            print("\nTwinned Cities")
+            print("--------------")
+            entries = len(values1)
+            for name in range(entries):
+                print(values1[name],"<->",values2[name])
 
     return

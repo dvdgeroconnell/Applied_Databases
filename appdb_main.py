@@ -56,7 +56,11 @@ def main():
                 age = input("Age : ")
                 salary = input("Salary : ")
                 city = input("City : ")
-                ap.add_person(id, name, age, salary, city)
+                
+                if id.isdigit():
+                    ap.add_person(id, name, age, salary, city)
+                else:
+                    print("Error: ID must be an integer")
 
             case '4':
                 success = False
@@ -97,7 +101,14 @@ def main():
                     twin = input("Enter ID of City to twin with Dublin: ")
                     if twin.isdigit():
                         proceed = True
-                ct.create_twin(twin)
+
+                # Now loop until one of the success criteria is met
+                proceed = False
+                proceed = ct.create_twin(twin)
+                while not proceed:
+                    twin = input("Enter ID of City to twin with Dublin: ")
+                    if twin.isdigit():
+                        proceed = ct.create_twin(twin)
 
             case _:
                 # Catch-all for entries other than the ones listed above

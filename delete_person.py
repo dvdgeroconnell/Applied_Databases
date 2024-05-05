@@ -43,7 +43,7 @@ def delete_person(delete_id):
 
     if delete:
         # Good to delete - connection needs to be restablished
-        db_conn = pml.connect(host="localhost", user="root", password="", db="appdbproj",
+        db_conn = pml.connect(host=host, user=user, password=password, db=database,
                               cursorclass=pml.cursors.DictCursor)
 
         del_sql = "DELETE FROM person WHERE personID = %s"

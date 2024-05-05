@@ -32,7 +32,6 @@ def twinned_cities():
 
     #uri = "neo4j://localhost:7687"
     with gdb.driver(uri, auth=(user,password), max_connection_lifetime=1000) as driver:
-        #print(driver.execute_query("SHOW HOME DATABASE").records[0]["name"])
 
         with driver.session() as session:
             #res = session.run("SHOW DATABASES yield name;")

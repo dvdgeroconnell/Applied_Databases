@@ -3,15 +3,11 @@
 # This file includes a set of Python functions to query and update the neo4j database.
 # The user is asked to enter the ID of a city to be twinned with Dublin in neo4j
 # Scenario 1: the city doesn't exist in neo4j so it is retried from mysql, added to 
-# neo4jand twinned with Dublin
+# neo4j and twinned with Dublin
 # Scenario 2: the city exists in neo4j and is twinned with Dublin.
 # Scenario 3: the city is already twinned with Dublin so no action is taken.
-# Error Condition 1: The city does not exist in MySQL - the 
-
-
-# 7add an entry to the person table in the appdbproj database in MySQL
-# Exception handling around duplicate primary keys and missing foreigh keys is done.
-# Generic exceptions are also caught.
+# Error Condition 1: The city does not exist in MySQL - the user is asked for a valid city.
+# Error Condition 2: Dublin does not exist in neo4j - the user is returned to the main menu.
 #
 # Author: David O'Connell
 #
@@ -144,7 +140,6 @@ def create_twin(twin):
             if dublin_exists != '':
                 # If the city does not exist in the neo4j database, retrieve from MySQL.
                 if city == '':
-                    # print("Scenario 1")
                     exists, city = retrieve_city_from_mysql(twin)
 
                     if exists:
@@ -159,7 +154,6 @@ def create_twin(twin):
                     # It won't be if it was just added, so the check is redundant in that case.
                     twinned = session.read_transaction(check_twinned, twin)
                     if twinned =='':
-                        print("I shouldn't be here")
                         checked = session.write_transaction(new_twin, twin)
                         if checked:
                             print("Dublin is now twinned with", city)

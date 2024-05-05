@@ -79,8 +79,8 @@ def city_population(id):
 
             if do_update:
                 # Need to open the connection again...
-                db_conn = pml.connect(host="localhost", user="root", password="", db="appdbproj",
-                                      cursorclass=pml.cursors.DictCursor)
+                db_conn = pml.connect(host=host, user=user, password=password, db=database,
+                     cursorclass=pml.cursors.DictCursor)
                 
                 update_sql = "UPDATE city SET Population = %s WHERE ID = %s"
                 with db_conn:
